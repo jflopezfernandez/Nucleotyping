@@ -1,3 +1,5 @@
+
+# CMake Things
 CMakeCache.txt
 CMakeFiles
 CMakeScripts
@@ -7,3 +9,11 @@ cmake_install.cmake
 install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
+
+# Binary Files
+*.exe
+
+# Gene Sequence Files
+*.pep
+*.fas
+*.fa
