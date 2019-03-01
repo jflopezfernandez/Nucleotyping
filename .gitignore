@@ -1,4 +1,7 @@
 
+# Batch Files
+*.bat
+
 # CMake Things
 CMakeCache.txt
 CMakeFiles
@@ -12,8 +15,10 @@ CTestTestfile.cmake
 
 # Binary Files
 *.exe
+*.o
 
 # Gene Sequence Files
 *.pep
 *.fas
 *.fa
+*.gbff
