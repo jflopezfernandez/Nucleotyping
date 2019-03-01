@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
      * 
      */
     fseek(inputFile, 0L, SEEK_END);
-    const auto size = ftell(inputFile);
+    const auto size = ftell(inputFile) + 1;
     rewind(inputFile);
 
     unsigned long FirstLine = 0;
@@ -23,6 +23,10 @@ int main(int argc, char *argv[])
     unsigned long Cytosine = 0;
     unsigned long Guanine  = 0;
     unsigned long Thymine  = 0;
+
+    char subsequence[] = "GTATGTGTCAGAGAGAGAGGGGAGAGAACGGGAGGGGAGAGCTTTCAAACTGATTTTAAAACATATATGGAAAAGCATGGAGCTAAGCTGGATATCAAGATATATTATAAAGCTATAATCATTTGAAACATTGTATAATTGGCACAGGGAGAAACAGAGATCAGTTGCTCCAGAAACAGACCTACATATATTACATTCACTTGATGTACAGTAAAGATGACACTGGAGTGTGGCTGAGAAAGGGTGATGTGTTTTTTTGTGGGTTTTTTTTTTTTTTTTTTTGAGACAGAGTCTTGCTCTGTCGCCAGGCTGGAGTGCAGGGGCACAATCTCGGCTCACTGCAACCTCCGACTCCCTGGTTCAAGTGATTCTCCTGCCTCAGCCTCCTGATTAGCTGGGATTACAGGCATGCGCCACCACCCCCAG";
+    char* subseqpt = NULL;
+    bool active = false;
 
     char c = fgetc(inputFile);
 
@@ -45,21 +49,38 @@ int main(int argc, char *argv[])
     while (c = fgetc(inputFile)) {
         if (c == EOF) { break; }
 
-        // printf("%c", c);
-
-        if (c == 'A') {
-            ++Adenine;
-        } else if (c == 'C') {
-            ++Cytosine;
-        } else if (c == 'G') {
-            ++Guanine;
-        } else if (c == 'T') {
-            ++Thymine;
-        } else if (c == '\n') {
-            ++NewLines;
-        } else {
-            printf("%c", c);
+        /** Find Subsequence in Genome Data
+         * 
+         */
+        if (c == *subsequence) {
+            active = true;
+            subseqpt = subsequence + 1;
         }
+
+        /** Count Monomers
+         * 
+         */
+        // if (c == 'A') {
+        //     ++Adenine;
+        // } else if (c == 'C') {
+        //     ++Cytosine;
+        // } else if (c == 'G') {
+        //     ++Guanine;
+        // } else if (c == 'T') {
+        //     ++Thymine;
+        // } else if (c == '\n') {
+        //     ++NewLines;
+        // } else {
+        //     /** If we hit this point, we're reading in a character that we were
+        //      *  not prepared for. I'm going to have to think about how exactly I
+        //      *  want to handle this because this is a situation that really
+        //      *  shouldn't happen, but the variation in genome sequence data 
+        //      *  files that I've seen so far suggests it may be more common than
+        //      *  would be reasonable to ignore.
+        //      * 
+        //      */
+        //     printf("%c", c);
+        // }
     }
 
     // const auto total = Adenine + Cytosine + Guanine + Thymine;
